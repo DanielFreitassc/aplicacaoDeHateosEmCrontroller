@@ -25,15 +25,13 @@ List<ProductEntity> productsList = productRepository.findAll();
 # Enpoint de GET BY ID
 ### ANTES
 ```
-@PutMapping("/products/{id}")
-public ResponseEntity<Object> updateProduct(@PathVariable(value = "id") UUID id, @RequestBody @Valid ProductRecordDTO productRecordDTO) {
+@GetMapping("/products/{id}")
+public ResponseEntity<Object> getOneProduct(@PathVariable(value = "id") UUID id){
     Optional<ProductEntity> productOne = productRepository.findById(id);
-    if(productOne.isEmpty()){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não Encontrado");
+    if(productOne.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado");
     }
-    var productEntity = productOne.get();
-    BeanUtils.copyProperties(productRecordDTO, productEntity);
-        return ResponseEntity.status(HttpStatus.OK).body(productRepository.save(productEntity));
+    return ResponseEntity.status(HttpStatus.OK).body(productOne.get());
 }
 ```
 ### DEPOIS

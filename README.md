@@ -1,6 +1,6 @@
 
 
-#Endpoint de GET ALL
+# Endpoint de GET ALL
 ### ANTES
 ```
 @GetMapping("/products")
